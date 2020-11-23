@@ -23,6 +23,7 @@ import android.os.Bundle
 import android.view.PointerIcon
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.chromeos.samples.pointericon.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,11 +34,15 @@ class MainActivity : AppCompatActivity() {
     private val CURSOR_WIDTH = 30
     private val CURSOR_HEIGHT = 32
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        val pointerRecyclerView = findViewById<RecyclerView>(R.id.pointer_recycler)
+        val pointerRecyclerView = binding.pointerRecycler
 
         // Loading a bitmap to use later as a pointer icon
         val chromeDinoBitmap = Bitmap.createScaledBitmap(
