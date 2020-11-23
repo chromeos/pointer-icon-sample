@@ -18,11 +18,10 @@ package com.google.chromeos.samples.pointericon
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.PointerIcon
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.chromeos.samples.pointericon.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -46,17 +45,20 @@ class MainActivity : AppCompatActivity() {
 
         // Loading a bitmap to use later as a pointer icon
         val chromeDinoBitmap = Bitmap.createScaledBitmap(
-            BitmapFactory.decodeResource(
-                this.resources,
-                R.drawable.chrome_dino
-            ), CURSOR_WIDTH, CURSOR_HEIGHT, false
+            BitmapFactory.decodeResource(this.resources, R.drawable.chrome_dino),
+            CURSOR_WIDTH, CURSOR_HEIGHT, false
         )
 
         val demoPointerIcons = PointerIcons(this)
 
         // Creating the pointer icon here and adding it to the list of samples
-        demoPointerIcons.addIcon(PointerIcon.create(chromeDinoBitmap,
-            (CURSOR_WIDTH/2).toFloat(), (CURSOR_HEIGHT/2).toFloat()), "Chrome Dino")
+        demoPointerIcons.addIcon(
+            PointerIcon.create(
+                chromeDinoBitmap,
+                (CURSOR_WIDTH / 2).toFloat(), (CURSOR_HEIGHT / 2).toFloat()
+            ),
+            "Chrome Dino"
+        )
 
         // Setting up the recycler view to display each of the icons
         val width = resources.configuration.screenWidthDp
@@ -68,6 +70,5 @@ class MainActivity : AppCompatActivity() {
                 PointerIcon.getSystemIcon(applicationContext, PointerIcon.TYPE_DEFAULT)
             false
         }
-
     }
 }
