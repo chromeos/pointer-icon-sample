@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,11 +18,11 @@ package com.google.chromeos.samples.pointericon
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.PointerIcon
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.chromeos.samples.pointericon.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,25 +33,32 @@ class MainActivity : AppCompatActivity() {
     private val CURSOR_WIDTH = 30
     private val CURSOR_HEIGHT = 32
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        val pointerRecyclerView = findViewById<RecyclerView>(R.id.pointer_recycler)
+        val pointerRecyclerView = binding.pointerRecycler
 
         // Loading a bitmap to use later as a pointer icon
         val chromeDinoBitmap = Bitmap.createScaledBitmap(
-            BitmapFactory.decodeResource(
-                this.resources,
-                R.drawable.chrome_dino
-            ), CURSOR_WIDTH, CURSOR_HEIGHT, false
+            BitmapFactory.decodeResource(this.resources, R.drawable.chrome_dino),
+            CURSOR_WIDTH, CURSOR_HEIGHT, false
         )
 
         val demoPointerIcons = PointerIcons(this)
 
         // Creating the pointer icon here and adding it to the list of samples
-        demoPointerIcons.addIcon(PointerIcon.create(chromeDinoBitmap,
-            (CURSOR_WIDTH/2).toFloat(), (CURSOR_HEIGHT/2).toFloat()), "Chrome Dino")
+        demoPointerIcons.addIcon(
+            PointerIcon.create(
+                chromeDinoBitmap,
+                (CURSOR_WIDTH / 2).toFloat(), (CURSOR_HEIGHT / 2).toFloat()
+            ),
+            "Chrome Dino"
+        )
 
         // Setting up the recycler view to display each of the icons
         val width = resources.configuration.screenWidthDp
@@ -63,6 +70,5 @@ class MainActivity : AppCompatActivity() {
                 PointerIcon.getSystemIcon(applicationContext, PointerIcon.TYPE_DEFAULT)
             false
         }
-
     }
 }
