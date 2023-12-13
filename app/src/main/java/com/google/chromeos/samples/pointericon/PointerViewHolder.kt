@@ -26,10 +26,6 @@ class PointerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(pointerPair: Pair<PointerIcon, String>) {
         val pointerText = itemView.findViewById<TextView>(R.id.pointer_name)
         pointerText.text = pointerPair.second
-
-        itemView.setOnHoverListener { view, motionEvent ->
-            view.pointerIcon = pointerPair.first
-            false
-        }
+        itemView.pointerIcon = pointerPair.first
     }
 }
