@@ -27,26 +27,26 @@ import com.google.chromeos.samples.pointericon.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     // Number of DPs that I want each column to be in size
-    private val COLUMN_DIVIDER = 208
+    private val columnDivider = 208
 
     // The size of the mouse cursor
-    private val CURSOR_WIDTH = 30
-    private val CURSOR_HEIGHT = 32
+    private val cursorWidth = 30
+    private val cursorHeight = 32
 
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        val root = binding.root
+        setContentView(root)
 
         val pointerRecyclerView = binding.pointerRecycler
 
         // Loading a bitmap to use later as a pointer icon
         val chromeDinoBitmap = Bitmap.createScaledBitmap(
             BitmapFactory.decodeResource(this.resources, R.drawable.chrome_dino),
-            CURSOR_WIDTH, CURSOR_HEIGHT, false
+            cursorWidth, cursorHeight, false
         )
 
         val demoPointerIcons = PointerIcons(this)
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         demoPointerIcons.addIcon(
             PointerIcon.create(
                 chromeDinoBitmap,
-                (CURSOR_WIDTH / 2).toFloat(), (CURSOR_HEIGHT / 2).toFloat()
+                (cursorWidth / 2).toFloat(), (cursorHeight / 2).toFloat()
             ),
             "Chrome Dino"
         )
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         val width = resources.configuration.screenWidthDp
         pointerRecyclerView.adapter = PointerRecyclerAdapter(demoPointerIcons.getIcons())
         pointerRecyclerView.layoutManager =
-            GridLayoutManager(applicationContext, width / COLUMN_DIVIDER)
+            GridLayoutManager(applicationContext, width / columnDivider)
         pointerRecyclerView.setOnHoverListener { view, _ ->
             view.pointerIcon =
                 PointerIcon.getSystemIcon(applicationContext, PointerIcon.TYPE_DEFAULT)
